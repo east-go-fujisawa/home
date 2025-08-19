@@ -1,5 +1,6 @@
 var url = ""; //なまえとIDデータ
 var names_ids_datas = "";
+var add_name = [];
 fetch(url,{
     "method":"get",
     "mode":"cors"
@@ -33,6 +34,14 @@ document.getElementById("grade").addEventListener("change",change);
 function change(){
     document.getElementById("names2").remove();
     var grade = document.getElementById("grade").value;
+    if(grade.indexOf("全員") > 0){
+        grade = grade.substring(0,1);
+        for(var n of datas[0][grade][0]["name"]){
+        var text2 = '<p class="b1" id="'+n+'"onclick=del('+n+')>'+n+'</p>';
+        document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
+        add_name.push(text);
+        }
+    }else{
     grade = grade.substring(0,1);
     var count = -1;
     document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
@@ -42,7 +51,8 @@ function change(){
         document.getElementById("names2").insertAdjacentHTML("beforeend",text2);
     }
 }
-var add_name = [];
+}
+
 function add(text){
         if(names_ids_datas.length > 0){
         document.getElementById(text).remove();
