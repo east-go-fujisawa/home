@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>LINE配信</title>
+        <link rel="stylesheet" href="css-line_send.css">
+    </head>
+    <body>
+        <div class="top" id="top">
+            <h1>LINE配信ツール</h1>
+        </div>
+        <div class="center" id="center">
+            <div class="left" id="left">
+                <p class="theme" id="theme">配信者を選ぶ</p>
+                <select id="grade">
+                    <input value="1年">
+                    <input value="2年">
+                    <input value="3年">
+                </select>
+                <div id="names"><div id="names2"></div></div> <!--学年に所属している名前を追加-->
+                <div class="add_names" id="add_names">
+
+                </div>
+            </div>
+            <div class="right" id="right">
+                <input type="text" id="texts" placeholder="メッセージを入力" value="">
+                <button id="send_button" onclick="send()">送信する</button>
+            </div>
+        </div>
+        <script src="js-line_send.js"></script>
+    </body>
+</html>

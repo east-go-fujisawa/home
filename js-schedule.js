@@ -5,7 +5,7 @@ document.getElementById("add1").onclick = add;
 document.getElementById("sub").onclick = sub;
 var url = "https://script.google.com/macros/s/AKfycbx0xGKdu9XNdBmaQV9S1kUGB44f6boIPswobzhvHawe6ahkRSWJkoSwhW1cspUOh1o/exec";
 var username = "";
-if(document.body.offsetWidth > 2000){
+if(screen.width > 800){
 var text ='<link rel="stylesheet" href="css-schedule.css">';
 }else{
 var text = '<link rel="stylesheet" href="css-schedule2.css">';
