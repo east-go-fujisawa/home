@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>講座登録</title>
+<link href="http://fonts.googleapis.com/earlyaccess/notosansjp.css">
+<link rel="stylesheet" href="css-c_add.css">
+    </head>
+    <body onload="load_classes()">
+        <div class="top" id="top">
+            <h1>Toshin Weekly Schedule</h1>
+            <div class="b1" id="b1">
+                <div class="b2" id="b2" onclick='location.href="login.html"'>ログイン</div>
+                <div class="b3" id="b3" onclick='location.href="register.html"'>新規登録</div>
+            </div>
+        </div>
+                    <div class="block2" id="block2">
+                <p class="add" id="add" onclick='jump("index")'>ホーム</p>
+                <p class="change" id="add" onclick='jump("add")'>予定の追加</p>
+                <p class="past" id="past" onclick='jump("past")'>過去の予定</p>
+                <p class="add2" id="add2" onclick='jump("change")'>予定の変更</p>
+            </div>
+        <div class="center" id="center">
+           
+          <div class="block3" id="block3">
+            <h2 class="week" id="week">講座登録</h2>
+            
+            <div class="block1" id="block1">
+               <div class="c1" id="c1">
+                    <p class="schedule" id="schedu">講座を登録する</p>
+                    <input type="text" id="c_name"value="" placeholder="（例）スタンダート物理Part1">
+                </div>
+                <div class="c1" id="c1">
+                    <p class="schedule" id="schedu">登録</p>
+                    <p class="schedule4" id="schedule2" onclick="send()">登録</p>
+                </div>
+                <div class="c1" id="c1">
+                    <p class="schedule" id="schedu">講座を確認</p>
+                    <div class="block4" id="block4">
+  読込み中
+                    </div>
+                </div>
+            </div>
+                                 
+        </div>
+</div>
+            
+
+            
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="js-c_add.js"></script>
+    </body>
+</html>
+<!--GUアンケートとかHRアンケートとか-->
+<!--   font-family: Lucida Console;-->

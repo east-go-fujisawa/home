@@ -1,0 +1,215 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial;
+    background-color: rgb(250, 246, 246);
+}
+h1{
+    margin:0;
+    padding: 0;
+}
+p{
+    margin:0;
+    padding:0;
+}
+div{
+    margin:0;
+    padding:0;
+}
+.top{
+    position: relative;
+    width:100vw;
+    height: 100px;/*15vh*/
+    background-color: black;
+    color:white;
+}
+.top h1{
+    line-height: 100px;
+    letter-spacing: 2px;
+    padding-left:5vw;
+    font-weight: 700;
+
+    color:black;
+}
+.top .b1{
+    position: absolute;
+    right:5vw;
+    bottom:25px;/*3.25vh*/
+    height:50px;/*7.5vh*/
+    line-height: 50px;
+    
+}
+.top .b1 div{
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    padding-left:1vw;
+    padding-right:1vw;
+}
+.top .b1 div:hover{
+    background-color:rgb(90, 90, 90);
+}
+.top .b2{
+    color:white;
+}
+
+.log{
+    position: relative;
+    width:100vw;
+    height: 77.5vh;
+    display: none;
+    text-align: center;
+}
+.log h1{
+    font-weight: 400;
+    font-size:20px;
+    letter-spacing: 2px;
+}
+
+
+
+.center {
+    position: relative;
+width:100vw;
+height:77.5vh;
+display: none;
+}
+.center .block11{
+    font-weight: 600;
+    border-bottom: 2px solid black;
+}
+.center  div{
+    
+    display: inline-block;
+    height:fit-content;
+}
+.center  p{
+
+ padding-bottom: 2vh;
+ 
+     width:max-content;
+    font-weight:600;
+    font-size:20px;
+    border-bottom:5px solid black;
+}
+.center  .newss{
+    position: absolute;
+    top:2vh;
+    left:5vw;
+    width:40vw;
+    width:40vw;
+}
+.center .newss p{
+    margin-bottom: 2.5vh;
+    letter-spacing: 2px;
+}
+.center .newss2{
+    position: absolute;
+    top:2vh;
+    right:5vw;
+    width:40vw;
+    
+}
+.center .newss2 p{
+    margin-bottom: 2.5vh;
+    letter-spacing: 2px;
+}
+.center  .newss div{
+    display: block;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+ 
+   border-left: 2px solid black;
+ 
+}
+.center .newss .box1{
+ border: none;
+}
+.center .newss2 .box2{
+    border:none;
+} 
+.center .block3 .week{
+    margin-left:5vw;
+    letter-spacing: 2px;
+}
+.center .newss2 div{
+    display: block;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+ border-left: 2px solid black;
+}
+.center  .block3{
+    position: absolute;
+    bottom: 0;
+    width:100vw;
+    height:40vh;/*ここどうにかしたい*/
+}
+.center .bottom{
+    position: absolute;
+    bottom: 0;
+}
+.center .block3 .block1 {
+    position: relative;
+    width: 100vw;
+    padding-top: 0.5vh;
+    padding-bottom: 1.5vh;
+    background-color: black;
+    color:white;
+    vertical-align: top;
+}
+.center .block3 .block1 .c1{
+    width:max-content;
+    display: inline-block;
+    vertical-align: top;
+}
+.center .block3 .block1 .c1 div{
+    vertical-align: top;
+}
+
+.center .block3 .block1 .schedule{
+  
+    width:15vw;
+    font-weight:500;
+    font-size: 10px;
+    padding: 0;
+    padding-top:1vh;
+    padding-left:1vw;
+}
+.center .block3 .block1 .schedule2{
+
+    width:15vw;
+    font-weight:500;
+    font-size: 15px;
+    padding: 0;
+    padding-left:1.5vw;
+    margin: 0;
+}
+
+
+
+.block2 {
+    position: relative;
+    width: 100vw;
+    height:50px;/*7.5vh*/
+    display: flex;
+    background-color: black;
+}
+.block2 p{
+    width:10vw;
+    height: 50px;/*7.5vh*/
+    line-height: 50px;/*7.5vh*/
+    font-size: 10px;
+    text-align: center;
+    display: inline-block;
+    color: white;
+}
+.block2 p:hover{
+ background-color:rgb(90, 90, 90);
+}
+.b{
+color:black;
+}
