@@ -516,7 +516,7 @@ for(var i = 1; i<=after_last_date; i++){
     document.getElementById("add_d").insertAdjacentHTML("beforeend",text);
 }
 
-
+number_get();
     }else if(document.getElementById("start_t").value == "ww"){
         document.getElementById("add_d").remove();
         document.getElementById("b").remove();
@@ -728,4 +728,33 @@ function sub2(){
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
     document.getElementById("bar").style.paddingLeft = "15vw";
     document.getElementById("ca").style.marginLeft = "15vw";
+}
+function number_get(){
+    document.getElementById("sn").innerHTML = "更新中";
+    var url2 = url+"?branch=number_get";
+    fetch(url2,{
+        "method":"get",
+        "mode":"cors"
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.json()
+        }
+    })
+    .then(json =>{
+        for(var i = 1; i<=31; i++){
+            var text1 = "d"+i;
+            var text2 = "";
+            var days = ["朝勤務","昼勤務","夜勤務"];
+            for(var a =1; a<=3; a++){
+                text2 += '<p class="dd" id="dd">'+days[a-1]+":"+json[0][i][0][a]+'</p>';
+            }
+            document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
+        }
+        document.getElementById("sn").innerHTML = "募集人数の設定";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ取得中にエラーが発生しました");
+    })
 }
