@@ -4,6 +4,7 @@ var names_ids_datas = "";
 function start(){
 document.getElementById("center").style.display = "none";
 document.getElementById("t").innerHTML = "ー準備中ー";
+document.getElementById("t").style.color = "black";
 var url2 = url+"?branch=username_get";
 fetch(url2,{
     "method":"get",
@@ -18,6 +19,7 @@ fetch(url2,{
     names_ids_datas = json
     document.getElementById("center").style.display = "block";
 document.getElementById("t").innerHTML = "LINE";
+document.getElementById("t").style.color = "rgb(0, 223, 11)";
 })
 .catch(e =>{
     console.log(e);
@@ -41,12 +43,19 @@ document.getElementById("grade").onchange = change;
 function change(grade){
     document.getElementById("names2").remove();
     grade = grade.target.value;
+    
     if(grade.indexOf("全員") > 0){
         grade = grade.substring(0,1);
+        var count = -1;
         for(var n of names_ids_datas[0][grade]){
+            count++;
+            if(count == 0){
+
+            }else{
         var text2 = '<p class="b1" id="'+n+'"onclick=del("'+n+'")>'+n+'</p>';
         document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
         add_name.push(text);
+            }
         }
     }else{
     grade = grade.substring(0,1);
@@ -54,8 +63,12 @@ function change(grade){
     document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
     for(var n of names_ids_datas[0][grade]){
         count++;
+        if(count == 0){
+
+        }else{
         var text2 = '<p class="b1" id="'+n+'" onclick=add("'+n+'")>'+n+'</p>';
         document.getElementById("names2").insertAdjacentHTML("beforeend",text2);
+        }
     }
 }
 }
@@ -87,10 +100,17 @@ function del(text){
         }
 }
 
-
+function send2(){
+    var texts = document.getElementById("texts").value;
+    console.log(texts);
+    texts = texts.replace(/\n/g,'/'+'n');
+    console.log(texts);
+}
 function send(){
     document.getElementById("send_button").innerHTML = "送信中";
     var texts = document.getElementById("texts").value;
+    //texts = texts.replace(/\n/g,"\"+'n');
+    console.log(texts);
     var datas = [{
         "message":texts,
         "usernames":add_name,
