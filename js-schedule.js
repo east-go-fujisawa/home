@@ -371,6 +371,7 @@ function w(t){
     var c = 0;
     if(t == "n"){
         document.getElementById("blocks").remove();
+        document.getElementById("blocks").innerHTML = "送信中";
     var text = '<div id="blocks"></div>';
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
     document.getElementById("bar").style.paddingLeft = "15vw";
@@ -383,8 +384,16 @@ function w(t){
             "Content-Type":"application/json",
             "body":JSON.stringify(data)
         }
-        fetch(yrl,params);
-        alert("送信しました");
+        fetch(url,params);
+        alert("送信しました")
+        .then(response=>{
+            document.getElementById("blocks").innerHTML = "送信完了";
+        })
+        .catch(err=>{
+            document.getElementById("blocks").innerHTML = "エラー";
+            alert("データ送信中にエラーが発生しました\nエラーコード：2");
+            console.log(err);
+        })
     }else if(t == "m"){
         document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
@@ -443,9 +452,30 @@ function w(t){
     }else if(t == "y"){
 
     }else if(t == "fs"){
-        
+            document.getElementById("blocks").remove();
+    var text = '<div id="blocks"></div>';
+    document.getElementById("ca").insertAdjacentHTML("beforeend",text);
+    document.getElementById("bar").style.paddingLeft = "15vw";
+    document.getElementById("ca").style.marginLeft = "15vw";
+        var url2 = url+"?branch=d_schedule";
+        fetch(url2,{
+            "method":"get",
+            "mode":"cors"
+        })
+        .then(response =>{
+            if(response.ok){
+                return response.json();
+            }
+        })
+        .then(json =>{
+            document.getElementById("blocks").innerHTML = JSON.stringify(json);
+        })
+        .catch(err=>{
+            alert("データ取得中にエラーが発生しました\nエラーコード：3");
+            console.log(err);
+        })
     }else if(t == "sn"){
-                document.getElementById("blocks").remove();
+    document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
     document.getElementById("bar").style.paddingLeft = "15vw";
@@ -538,7 +568,7 @@ for(var num = 1; num<=4; num++){
     }
 }
 }
-            var text = '<p class="fix" id="fix" onclick=fixed()>確定</p>';
+            var text = '<p class="fix" id="fix2" onclick=fixed()>確定</p>';
             document.getElementById(text2).insertAdjacentHTML("beforeend",text);
 }
 var count4 = 0;
@@ -562,7 +592,7 @@ function del2(d,t,n,s){
 }
 function fixed(){
     console.log(main_data);
-    document.getElementById("fix").innerHTML = "送信中";
+    document.getElementById("fix2").innerHTML = "送信中";
     var params = {
         "method":"post",
         "mode":"no-cors",
@@ -572,7 +602,7 @@ function fixed(){
     var url2 = url+"?branch=fixed";
     fetch(url2,params)
     .then(response=>{
-        document.getElementById("fix").innerHTML = "確定済";
+        document.getElementById("fix2").innerHTML = "確定済";
     })
     .catch(err=>{
         console.log(err);
