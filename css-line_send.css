@@ -1,0 +1,87 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial;
+    background-color: rgb(243,243,243);
+}
+.top{
+    position:relative;
+    left:5vw;
+    width: max-content;
+    height:10vh;
+    border-bottom: 3px solid black;
+}
+.top h1{
+    letter-spacing: 4px;
+    
+}
+.top strong{
+    color: rgb(0, 223, 11);
+    letter-spacing: 0px;
+    padding-right:2vw;
+}
+.center{
+    position: relative;
+    left:5vw;
+    height: max-content;
+}
+.center .left select{
+    width:20vw;
+    height:5vh;
+    outline: none;
+    border:none;
+    box-shadow: 0 0 5px 2px rgb(243,243, 243);
+}
+.left div{
+    display: inline-block;
+    vertical-align: top;
+    width: 25vw;
+}
+.left div p{
+    vertical-align: top;
+}
+.center .left .b1{
+    margin:0;
+    padding:0;
+    width:fit-content;
+    height:fit-content;
+    background-color: black;
+    color:white;
+    font-size:10px;
+    padding: 2vw;
+    padding-top:1vw;
+    padding-bottom:1vw;
+    margin-bottom:10px;
+    margin-right:10px;
+    display: inline-block;
+}
+.theme{
+    font-weight:700;
+    width:fit-content;
+}
+.right{
+    margin-top:5vh;
+    height: max-content;
+    width:fit-content;
+    vertical-align: top;
+}
+.right  textarea{
+    width: 60vw;
+    height:20vh;
+    outline: none;
+    border: none;
+    vertical-align: bottom;
+}
+.right button{
+    width: 10vw;
+    height:40px;
+    padding:0;
+    margin:0;
+    line-height:40px;
+    background-color: black;
+    color:white;
+    font-size:10px;
+    vertical-align: bottom;
+    outline:0;
+    border:0;
+}

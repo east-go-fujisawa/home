@@ -1,6 +1,9 @@
 var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
-var names_ids_datas = "";
 var add_name = [];
+var names_ids_datas = "";
+function start(){
+document.getElementById("center").style.display = "none";
+document.getElementById("t").innerHTML = "ー準備中ー";
 var url2 = url+"?branch=username_get";
 fetch(url2,{
     "method":"get",
@@ -8,16 +11,19 @@ fetch(url2,{
 })
 .then(response =>{
     if(response.ok){
-        return response.json();
+        return response.json()
     }
 })
 .then(json=>{
-    names_ids_datas = json;
+    names_ids_datas = json
+    document.getElementById("center").style.display = "block";
+document.getElementById("t").innerHTML = "LINE";
 })
 .catch(e =>{
     console.log(e);
     alert("データ取得時にエラーが発生しました\nエラーコード：4");
 })
+}
 /*
 var datas = [{"1":[{"name":[],"id":[]}],"2":[{"name":[],"id":[]}],"3":[{"name":[],"id":[]}],}];
 for(var i = 1; i<5; i+=2){
@@ -31,14 +37,14 @@ datas[0][i][0]["name"].push(n);
 }
 */
 
-document.getElementById("grade").addEventListener("change",change);
-function change(){
+document.getElementById("grade").onchange = change;
+function change(grade){
     document.getElementById("names2").remove();
-    var grade = document.getElementById("grade").target.value; //怪しい
+    grade = grade.target.value;
     if(grade.indexOf("全員") > 0){
         grade = grade.substring(0,1);
         for(var n of names_ids_datas[0][grade]){
-        var text2 = '<p class="b1" id="'+n+'"onclick=del('+n+')>'+n+'</p>';
+        var text2 = '<p class="b1" id="'+n+'"onclick=del("'+n+'")>'+n+'</p>';
         document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
         add_name.push(text);
         }
@@ -48,7 +54,7 @@ function change(){
     document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
     for(var n of names_ids_datas[0][grade]){
         count++;
-        var text2 = '<p class="b1" id="'+n+'"onclick=add('+n+')>'+n+'</p>';
+        var text2 = '<p class="b1" id="'+n+'" onclick=add("'+n+'")>'+n+'</p>';
         document.getElementById("names2").insertAdjacentHTML("beforeend",text2);
     }
 }
@@ -57,7 +63,7 @@ function change(){
 function add(text){
         if(names_ids_datas.length > 0){
         document.getElementById(text).remove();
-        var text2 = '<p class="b1" id="'+n+'"onclick=del('+n+')>'+n+'</p>';
+        var text2 = '<p class="b1" id="'+text+'" onclick=del("'+text+'")>'+text+'</p>';
         document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
         add_name.push(text);
         }else{
@@ -70,7 +76,7 @@ function add(text){
 
 function del(text){
         document.getElementById(text).remove();
-        var text2 = '<p class="b1" id="'+n+'"onclick=add('+n+')>'+n+'</p>';
+        var text2 = '<p class="b1" id="'+text+'"onclick=add("'+text+'")>'+text+'</p>';
         document.getElementById("names2").insertAdjacentHTML("beforeend",text2);
         var count = -1;
         for(var n of add_name){
@@ -80,6 +86,7 @@ function del(text){
             }
         }
 }
+
 
 function send(){
     document.getElementById("send_button").innerHTML = "送信中";

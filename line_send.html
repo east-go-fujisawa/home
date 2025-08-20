@@ -5,28 +5,35 @@
         <title>LINE配信</title>
         <link rel="stylesheet" href="css-line_send.css">
     </head>
-    <body>
+    <body onload="start()">
         <div class="top" id="top">
-            <h1>LINE配信ツール</h1>
+            <h1><strong id="t">LINE</strong>配信ツール</h1>
         </div>
         <div class="center" id="center">
             <div class="left" id="left">
+                <div class="grades">
                 <p class="theme" id="theme">配信者を選ぶ</p>
                 <select id="grade">
-                    <option value="1年">
-                    <option value="2年">
-                    <option value="3年">
-                    <option value="1年全員">
-                    <option value="2年全員">
-                    <option value="3年全員">
+                    <option>選択してください</option>
+                    <option value="1年">1年</option>
+                    <option value="2年">2年</option>
+                    <option value="3年">3年</option>
+                    <option value="1年全員">1年全員</option>
+                    <option value="2年全員">2年全員</option>
+                    <option value="3年全員">3年全員</option>
                 </select>
-                <div id="names"><div id="names2"></div></div> <!--学年に所属している名前を追加-->
+                </div>
+                <div id="names">
+                    <p class="theme">配信可能者</p>
+                    <div id="names2"></div>
+                </div> <!--学年に所属している名前を追加-->
                 <div class="add_names" id="add_names">
-
+                    <p class="theme">配信該当者</p>
                 </div>
             </div>
             <div class="right" id="right">
-                <input type="text" id="texts" placeholder="メッセージを入力" value="">
+                <p class="theme">配信するメッセージ</p>
+                <textarea id="texts" value="" placeholder="メッセージを入力する"></textarea>
                 <button id="send_button" onclick="send()">送信する</button>
             </div>
         </div>
