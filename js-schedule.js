@@ -21,7 +21,7 @@ document.getElementById("h4").innerHTML = username;
     alert("ログインしてください");
     location.href="schedule_login.html";
 }
-}catch(e){  
+}catch(e){
     console.log(e);
     alert("ログインしてください");
     location.href="schedule_login.html";
@@ -42,7 +42,6 @@ if(first_day == 0){
 //first_day = 1;
 
 document.getElementById("month").innerHTML = month+"月";
-document.getElementById("month").style.fontSize = "25px";
 
 if(first_day == 1){
 
@@ -96,7 +95,7 @@ function start(){
     .then(json=>{
         if(json == "ok"){
             
-            number_check();
+            d_schedule();
         }else{
             alert("登録の許可がありません");
             document.getElementById("sub").style.display = "none";
@@ -104,36 +103,42 @@ function start(){
         }
     })
 }
-function number_check(){
-    var url2 = url+'?branch=number_get';
+function d_schedule(){
+    var url2 = url + "?branch=d_schedule";
     fetch(url2,{
         "method":"get",
         "mode":"cors"
     })
     .then(response=>{
-        if(response.ok){}
-        return response.json()
+        if(response.ok){
+            return response.json();
+        }
     })
     .then(json=>{
         for(var i = 1; i<=after_last_date; i++){
-            var text = "d"+i;
-            var text2 = '<p class="nm">';
-            var days = ["朝","昼","夜"];
-            for(var a = 1; a<=3; a++){
-                if(json[0][i][0][a].length == 0){
-                    text2 += days[a-1]+"：未";
+            var text1 = "namess";
+            var text2 = "";
+            for(var a = 1; a<=4; a++){
+                text1 += toString(a) + toString(i);
+                var count = 0;
+                if(json[0][i][0][a].length > 0){
+                    for(var data of json[0][i][0][a]){
+                        count++;
+                        text2 = '<p class="p1" id="p'+i+','+a+','+count+'"onclick=del2("p'+i+','+a+','+count+',0")>'+data+"</p>";
+                        document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
+                        main_data[0][i][0][a].push(data);
+                    }
                 }else{
-                    text2 += days[a-1]+"："+json[0][i][0][a];
+                    text2 = "<p>希望者なし</p>";
+                    document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
                 }
             }
-            text2+="</p>";
-            document.getElementById(text).insertAdjacentHTML("beforeend",text2);
         }
         branch = "ok";
     })
     .catch(err=>{
         console.log(err);
-        alert("データ取得中にエラーが発生しました");
+        alert("データ取得中にエラーが発生しました\nエラーコード:1")
     })
 }
 function change(data){
@@ -352,14 +357,11 @@ console.log(JSON.stringify(datas));
     var url1 = url+'?username='+username;//セキュリティ面アウト
     fetch(url1,params)
     .then(res=>{
-        console.log(res);
-        if(res.ok){
-            console.log("success");
-alert("登録が完了しました\n(登録されているメールアドレスにも通知されます)")
-
-        }else{
-alert("シフト送信中にエラーが発生しました\n詳しくは管理者まで問い合わせてください")
-}
+alert("登録が完了しました\n(登録されているメールアドレスにも通知されます)");
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("シフト登録中にエラーが発生しました\n管理者に問い合わせてください");
     })
 }
 document.getElementById("w").onclick = w;
@@ -381,19 +383,8 @@ function w(t){
             "Content-Type":"application/json",
             "body":JSON.stringify(data)
         }
-        try{
-        document.getElementById("blocks").innerHTML = "送信中";
-        fetch(url,params)
-        .then(response=>{
-            document.getElementById("blocks").innerHTML = "送信完了";
-        })
-        }catch(e){
-            console.log(e);
-            document.getElementById("blocks").innerHTML = "送信失敗";
-            alert("リクエスト送信中にエラーが発生しました");
-            return;
-        }
-        
+        fetch(yrl,params);
+        alert("送信しました");
     }else if(t == "m"){
         document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
@@ -410,6 +401,7 @@ function w(t){
             "body":JSON.stringify(data)
         }
         fetch(url,params);
+        alert("送信しました");
         setTimeout(()=>{
             console.log("受信開始");
             var datas1 = "";
@@ -451,25 +443,7 @@ function w(t){
     }else if(t == "y"){
 
     }else if(t == "fs"){
-        document.getElementById("fs").innerHTML = "読込み中";
-        var url2 = url+"?branch=d_schedule";
-        fetch(url2,{
-            "method":"get",
-            "mode":"cors"
-        })
-        .then(response =>{
-            if(response.ok){
-                return response.json()
-            }
-        })
-        .then(json=>{
-            document.getElementById("blocks").innerHTML = JSON.stringify(json);
-            document.getElementById("fs").innerHTML = "確定シフト";
-        })
-        .catch(err=>{
-            console.log(err);
-            alert("データ取得中にエラーが発生しました");
-        })
+        
     }else if(t == "sn"){
                 document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
@@ -511,7 +485,7 @@ for(var i = 1; i<=after_last_date; i++){
     var text = '<div class="b1" onclick=pup2('+i+')><p class="date" id="date">'+i+'</p><div class="d" id="d'+i+'"></div></div>';
     document.getElementById("add_d").insertAdjacentHTML("beforeend",text);
 }
-number_get();
+
 
     }else if(document.getElementById("start_t").value == "ww"){
         document.getElementById("add_d").remove();
@@ -564,7 +538,7 @@ for(var num = 1; num<=4; num++){
     }
 }
 }
-            var text = '<p class="fix" onclick=fixed()>確定</p>';
+            var text = '<p class="fix" id="fix" onclick=fixed()>確定</p>';
             document.getElementById(text2).insertAdjacentHTML("beforeend",text);
 }
 var count4 = 0;
@@ -588,6 +562,7 @@ function del2(d,t,n,s){
 }
 function fixed(){
     console.log(main_data);
+    document.getElementById("fix").innerHTML = "送信中";
     var params = {
         "method":"post",
         "mode":"no-cors",
@@ -595,9 +570,17 @@ function fixed(){
         "body":JSON.stringify(main_data)
     }
     var url2 = url+"?branch=fixed";
-    fetch(url2,params);
+    fetch(url2,params)
+    .then(response=>{
+        document.getElementById("fix").innerHTML = "確定済";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ送信中にエラーが発生しました");
+    })
+
 }
-var number_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}],"branch":["number_set"]}];
+var number_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}]}];
 
 function addd1(){
 var dates = ["月曜","火曜","水曜","木曜","金曜","土曜","日曜"];
@@ -715,34 +698,4 @@ function sub2(){
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
     document.getElementById("bar").style.paddingLeft = "15vw";
     document.getElementById("ca").style.marginLeft = "15vw";
-}
-
-function number_get(){
-    document.getElementById("sn").innerHTML = "更新中";
-    var url2 = url+"?branch=number_get";
-    fetch(url2,{
-        "method":"get",
-        "mode":"cors"
-    })
-    .then(response=>{
-        if(response.ok){
-            return response.json()
-        }
-    })
-    .then(json =>{
-        for(var i = 1; i<=31; i++){
-            var text1 = "d"+i;
-            var text2 = "";
-            var days = ["朝勤務","昼勤務","夜勤務"];
-            for(var a =1; a<=3; a++){
-                text2 += '<p class="dd" id="dd">'+days[a-1]+":"+json[0][i][0][a]+'</p>';
-            }
-            document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
-        }
-        document.getElementById("sn").innerHTML = "募集人数の設定";
-    })
-    .catch(err=>{
-        console.log(err);
-        alert("データ取得中にエラーが発生しました");
-    })
 }
