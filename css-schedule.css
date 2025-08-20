@@ -8,12 +8,7 @@ h1{
     margin:0;
     padding:0;
 }
-h4{
-position: absolute;
-right:0;
-top:0;
-color: gray;
-}
+
 p{
     margin:0;
     padding: 0;
@@ -26,6 +21,14 @@ p{
     height:fit-content;
     border-bottom:1px solid black;
 
+}
+.top h4{
+position: absolute;
+right:0;
+bottom:0;
+margin:0;
+padding:0;
+color:grey;
 }
 .bar{
     position: relative;
@@ -204,7 +207,8 @@ p{
     /*border-bottom:1px solid black;*/
 }
 .u .right p:hover{
-    background-color: lightgray;
+    background-color: rgb(243, 243, 243);
+    box-shadow: 0 0 2px 1px rgb(243, 243, 243);
 }
 .u .right input{
     position: relative;
@@ -213,6 +217,7 @@ p{
 .u .right .o{
     border:none;
 }
+
 .u .right .o:hover{
     background-color:white;
 }
@@ -615,4 +620,12 @@ p{
 }
 .dd{
     font-size:11px;
+}
+.nm{
+    color:gray;
+    font-size:10px;
+}
+#dd{
+    font-weight:600;
+    font-size:15px;
 }
