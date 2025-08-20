@@ -1,7 +1,7 @@
-var url = ""; //なまえとIDデータ
+var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
 var names_ids_datas = "";
 var add_name = [];
-fetch(url,{
+fetch(url+"?branch=usernames_get",{
     "method":"get",
     "mode":"cors"
 })
@@ -15,7 +15,7 @@ fetch(url,{
 })
 .catch(e =>{
     console.log(e);
-    alert("データ取得時にエラーが発生しました");
+    alert("データ取得時にエラーが発生しました\nエラーコード：4");
 })
 /*
 var datas = [{"1":[{"name":[],"id":[]}],"2":[{"name":[],"id":[]}],"3":[{"name":[],"id":[]}],}];
@@ -33,7 +33,7 @@ datas[0][i][0]["name"].push(n);
 document.getElementById("grade").addEventListener("change",change);
 function change(){
     document.getElementById("names2").remove();
-    var grade = document.getElementById("grade").value;
+    var grade = document.getElementById("grade").target.value; //怪しい
     if(grade.indexOf("全員") > 0){
         grade = grade.substring(0,1);
         for(var n of datas[0][grade][0]["name"]){
@@ -78,4 +78,29 @@ function del(text){
                 add_name = add_name.splice(count,1);//若干怪しい定義を確認した方が良き
             }
         }
+}
+
+function send(){
+    document.getElementById("send_button").innerHTML = "送信中";
+    var texts = document.getElementById("texts").value;
+    var datas = [{
+        "message":texts,
+        "usernames":add_name,
+        "branch":"send"
+    }];
+    var params = {
+        "method":"post",
+        "mode":"no-cors",
+        "Content-Type":"application/json",
+        "body":JSON.stringify(datas)
+    }
+    fetch(url,params)
+    .then(response=>{
+        document.getElementById("send_button").innerHTML = "送信完了";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ送信中にエラーが発生しました\nエラーコード：5");
+    })
+    
 }
