@@ -21,7 +21,7 @@ document.getElementById("h4").innerHTML = username;
     alert("ログインしてください");
     location.href="schedule_login.html";
 }
-}catch(e){
+}catch(e){  
     console.log(e);
     alert("ログインしてください");
     location.href="schedule_login.html";
@@ -95,7 +95,8 @@ function start(){
     })
     .then(json=>{
         if(json == "ok"){
-            branch = "ok";
+            
+            number_check();
         }else{
             alert("登録の許可がありません");
             document.getElementById("sub").style.display = "none";
@@ -103,7 +104,38 @@ function start(){
         }
     })
 }
-
+function number_check(){
+    var url2 = url+'?branch=number_get';
+    fetch(url2,{
+        "method":"get",
+        "mode":"cors"
+    })
+    .then(response=>{
+        if(response.ok){}
+        return response.json()
+    })
+    .then(json=>{
+        for(var i = 1; i<=after_last_date; i++){
+            var text = "d"+i;
+            var text2 = '<p class="nm">';
+            var days = ["朝","昼","夜"];
+            for(var a = 1; a<=3; a++){
+                if(json[0][i][0][a].length == 0){
+                    text2 += days[a-1]+"：未";
+                }else{
+                    text2 += days[a-1]+"："+json[0][i][0][a];
+                }
+            }
+            text2+="</p>";
+            document.getElementById(text).insertAdjacentHTML("beforeend",text2);
+        }
+        branch = "ok";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ取得中にエラーが発生しました");
+    })
+}
 function change(data){
     if(data.target.value == "朝勤務"){
    document.getElementById("start_t").value = "9:00";
@@ -349,8 +381,19 @@ function w(t){
             "Content-Type":"application/json",
             "body":JSON.stringify(data)
         }
-        fetch(yrl,params);
-        alert("送信しました");
+        try{
+        document.getElementById("blocks").innerHTML = "送信中";
+        fetch(url,params)
+        .then(response=>{
+            document.getElementById("blocks").innerHTML = "送信完了";
+        })
+        }catch(e){
+            console.log(e);
+            document.getElementById("blocks").innerHTML = "送信失敗";
+            alert("リクエスト送信中にエラーが発生しました");
+            return;
+        }
+        
     }else if(t == "m"){
         document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
@@ -367,7 +410,6 @@ function w(t){
             "body":JSON.stringify(data)
         }
         fetch(url,params);
-        alert("送信しました");
         setTimeout(()=>{
             console.log("受信開始");
             var datas1 = "";
@@ -409,7 +451,25 @@ function w(t){
     }else if(t == "y"){
 
     }else if(t == "fs"){
-        
+        document.getElementById("fs").innerHTML = "読込み中";
+        var url2 = url+"?branch=d_schedule";
+        fetch(url2,{
+            "method":"get",
+            "mode":"cors"
+        })
+        .then(response =>{
+            if(response.ok){
+                return response.json()
+            }
+        })
+        .then(json=>{
+            document.getElementById("blocks").innerHTML = JSON.stringify(json);
+            document.getElementById("fs").innerHTML = "確定シフト";
+        })
+        .catch(err=>{
+            console.log(err);
+            alert("データ取得中にエラーが発生しました");
+        })
     }else if(t == "sn"){
                 document.getElementById("blocks").remove();
     var text = '<div id="blocks"></div>';
@@ -451,7 +511,7 @@ for(var i = 1; i<=after_last_date; i++){
     var text = '<div class="b1" onclick=pup2('+i+')><p class="date" id="date">'+i+'</p><div class="d" id="d'+i+'"></div></div>';
     document.getElementById("add_d").insertAdjacentHTML("beforeend",text);
 }
-
+number_get();
 
     }else if(document.getElementById("start_t").value == "ww"){
         document.getElementById("add_d").remove();
@@ -534,10 +594,10 @@ function fixed(){
         "Content-Type":"application/json",
         "body":JSON.stringify(main_data)
     }
-    var url2 = url+"?branch=ficed";
+    var url2 = url+"?branch=fixed";
     fetch(url2,params);
 }
-var number_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}]}];
+var number_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}],"branch":["number_set"]}];
 
 function addd1(){
 var dates = ["月曜","火曜","水曜","木曜","金曜","土曜","日曜"];
@@ -655,4 +715,34 @@ function sub2(){
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
     document.getElementById("bar").style.paddingLeft = "15vw";
     document.getElementById("ca").style.marginLeft = "15vw";
+}
+
+function number_get(){
+    document.getElementById("sn").innerHTML = "更新中";
+    var url2 = url+"?branch=number_get";
+    fetch(url2,{
+        "method":"get",
+        "mode":"cors"
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.json()
+        }
+    })
+    .then(json =>{
+        for(var i = 1; i<=31; i++){
+            var text1 = "d"+i;
+            var text2 = "";
+            var days = ["朝勤務","昼勤務","夜勤務"];
+            for(var a =1; a<=3; a++){
+                text2 += '<p class="dd" id="dd">'+days[a-1]+":"+json[0][i][0][a]+'</p>';
+            }
+            document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
+        }
+        document.getElementById("sn").innerHTML = "募集人数の設定";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ取得中にエラーが発生しました");
+    })
 }
