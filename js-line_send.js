@@ -1,13 +1,14 @@
 var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
 var names_ids_datas = "";
 var add_name = [];
-fetch(url+"?branch=username_get",{
+var url2 = url+"?branch=username_get";
+fetch(url2,{
     "method":"get",
     "mode":"cors"
 })
 .then(response =>{
     if(response.ok){
-        return response.json()
+        return response.json();
     }
 })
 .then(json=>{
