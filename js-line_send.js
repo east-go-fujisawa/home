@@ -1,7 +1,7 @@
 var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
 var names_ids_datas = "";
 var add_name = [];
-fetch(url+"?branch=usernames_get",{
+fetch(url+"?branch=username_get",{
     "method":"get",
     "mode":"cors"
 })
@@ -36,7 +36,7 @@ function change(){
     var grade = document.getElementById("grade").target.value; //怪しい
     if(grade.indexOf("全員") > 0){
         grade = grade.substring(0,1);
-        for(var n of datas[0][grade][0]["name"]){
+        for(var n of names_ids_datas[0][grade]){
         var text2 = '<p class="b1" id="'+n+'"onclick=del('+n+')>'+n+'</p>';
         document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
         add_name.push(text);
@@ -45,7 +45,7 @@ function change(){
     grade = grade.substring(0,1);
     var count = -1;
     document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
-    for(var n of datas[0][grade][0]["name"]){
+    for(var n of names_ids_datas[0][grade]){
         count++;
         var text2 = '<p class="b1" id="'+n+'"onclick=add('+n+')>'+n+'</p>';
         document.getElementById("names2").insertAdjacentHTML("beforeend",text2);
