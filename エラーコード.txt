@@ -1,2 +1,4 @@
+1:js-schedule.js/d_schedule()
+2：js-schedule.js/sub()
 4:js-line_send.js/None
 5:js-line_send.js/send()

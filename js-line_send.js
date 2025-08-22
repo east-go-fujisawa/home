@@ -1,7 +1,20 @@
 var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
 var add_name = [];
+var all_status = 0;
 var names_ids_datas = "";
 function start(){
+
+/*var urll = new URL(window.location.href);
+try{
+var param = urll.searchParams;
+param = param.get('url');
+if(param.length > 0){
+
+}
+}catch(e){
+
+}*/
+
 document.getElementById("center").style.display = "none";
 document.getElementById("t").innerHTML = "ー準備中ー";
 document.getElementById("t").style.color = "black";
@@ -53,8 +66,8 @@ function change(grade){
 
             }else{
         var text2 = '<p class="b1" id="'+n+'"onclick=del("'+n+'")>'+n+'</p>';
-        document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
-        add_name.push(text);
+        document.getElementById("add_names2").insertAdjacentHTML("beforeend",text2);
+        add_name.push(n);
             }
         }
     }else{
@@ -101,21 +114,52 @@ function del(text){
 }
 
 function send2(){
-    var texts = document.getElementById("texts").value;
-    console.log(texts);
-    texts = texts.replace(/\n/g,'/'+'n');
-    console.log(texts);
+
 }
+
 function send(){
     document.getElementById("send_button").innerHTML = "送信中";
     var texts = document.getElementById("texts").value;
+        if(texts.length == 0){
+        alert("空欄です");
+        document.getElementById("send_button").innerHTML = "送信する";
+        return;
+    }
     //texts = texts.replace(/\n/g,"\"+'n');
     console.log(texts);
+    if(all_status == 1){
+        var datas = [{
+            "message":texts,
+            "usernames":[1],
+            "branch":"send_all"
+        }]
+    }else if(all_status == 2){
+        var datas = [{
+            "message":texts,
+            "usernames":[2],
+            "branch":"send_all"
+        }]
+    }else if(all_status == 3){
+        var datas = [{
+            "message":texts,
+            "usernames":[3],
+            "branch":"send_all"
+        }]
+    }else{
+        var data_num2 = [];
+        if(data_num > 0){
+            data_num2.push(document.getElementById("i_url").value);
+        }else{
+            data_num2.push("none");
+        }
     var datas = [{
         "message":texts,
         "usernames":add_name,
+        "data_num":data_num2,
         "branch":"send"
     }];
+    }
+
     var params = {
         "method":"post",
         "mode":"no-cors",
@@ -125,10 +169,26 @@ function send(){
     fetch(url,params)
     .then(response=>{
         document.getElementById("send_button").innerHTML = "送信完了";
+        setTimeout(()=>{
+            document.getElementById("send_button").innerHTML = "送信する";
+        },3000);
     })
     .catch(err=>{
         console.log(err);
         alert("データ送信中にエラーが発生しました\nエラーコード：5");
     })
     
+}
+var data_num = 0;
+function jump(){
+    if(data_num == 0){
+    var number = Math.random()*100000;
+    number = parseInt(number);
+    data_num = number;
+    window.open("https://script.google.com/macros/s/AKfycbz953kk_2OzDM02VcmMtM5mBqVpMq5VgOUtJEtJ7kf5svRC-HNmsP1GJKBAnfCfQuo/exec?id="+data_num,"_blank");
+    document.getElementById("input_url").insertAdjacentHTML("beforeend",'<input type="url" id="i_url" value="" placeholder="URLを入力">')
+    document.getElementById("upl").remove();
+    }else{
+
+    }
 }

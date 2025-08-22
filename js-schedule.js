@@ -57,6 +57,7 @@ for(var i = 1; i<=after_last_date; i++){
     var text = '<div class="b1" onclick=pup('+i+')><p class="date" id="date">'+i+'</p><div class="d" id="d'+i+'"></div></div>';
     document.getElementById("add_d").insertAdjacentHTML("beforeend",text);
 }
+
 var branch = "go";
 function start_ani(){
     var count = 0;
@@ -80,6 +81,7 @@ function start_ani(){
         }
     },2000)
 }
+
 function start(){
     start_ani();
     var url1 = url+"?branch=s_check&username="+username;
@@ -94,8 +96,8 @@ function start(){
     })
     .then(json=>{
         if(json == "ok"){
-            
-            d_schedule();
+            //d_schedule();
+            number_get2();
         }else{
             alert("登録の許可がありません");
             document.getElementById("sub").style.display = "none";
@@ -103,6 +105,7 @@ function start(){
         }
     })
 }
+
 function d_schedule(){
     var url2 = url + "?branch=d_schedule";
     fetch(url2,{
@@ -115,6 +118,11 @@ function d_schedule(){
         }
     })
     .then(json=>{
+                console.log(json);
+        if(json == "確定シフトはありません"){
+            branch = "ok";
+            return;
+        }else{
         for(var i = 1; i<=after_last_date; i++){
             var text1 = "namess";
             var text2 = "";
@@ -135,6 +143,7 @@ function d_schedule(){
             }
         }
         branch = "ok";
+    }
     })
     .catch(err=>{
         console.log(err);
@@ -153,6 +162,7 @@ function change(data){
    document.getElementById("end_t").value = "22:00";
     }
 }
+
 var datas = [{1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[],10:[],11:[],12:[],13:[],14:[],15:[],16:[],17:[],18:[],19:[],20:[],21:[],22:[],23:[],24:[],25:[],26:[],27:[],28:[],29:[],30:[],31:[],}];
 var dates = ["月曜","火曜","水曜","木曜","金曜","土曜","日曜"];
 function add(){
@@ -331,8 +341,6 @@ function del(num,num2){
     console.log(datas[0][num])
 }
 
-
-
 function daw(){
     var text = "d"
         for(var i = 1; i<=31; i++){//月によって30か31とかをかえること
@@ -361,7 +369,7 @@ alert("登録が完了しました\n(登録されているメールアドレス�
     })
     .catch(err=>{
         console.log(err);
-        alert("シフト登録中にエラーが発生しました\n管理者に問い合わせてください");
+        alert("シフト登録中にエラーが発生しました\nエラーコード：2");
     })
 }
 document.getElementById("w").onclick = w;
@@ -371,9 +379,9 @@ function w(t){
     var c = 0;
     if(t == "n"){
         document.getElementById("blocks").remove();
-        document.getElementById("blocks").innerHTML = "送信中";
-    var text = '<div id="blocks"></div>';
+            var text = '<div id="blocks"></div>';
     document.getElementById("ca").insertAdjacentHTML("beforeend",text);
+        document.getElementById("blocks").innerHTML = "送信中";
     document.getElementById("bar").style.paddingLeft = "15vw";
     document.getElementById("ca").style.marginLeft = "15vw";
 
@@ -384,8 +392,8 @@ function w(t){
             "Content-Type":"application/json",
             "body":JSON.stringify(data)
         }
-        fetch(url,params);
-        alert("送信しました")
+        fetch(url,params)
+
         .then(response=>{
             document.getElementById("blocks").innerHTML = "送信完了";
         })
@@ -572,7 +580,7 @@ for(var num = 1; num<=4; num++){
             document.getElementById(text2).insertAdjacentHTML("beforeend",text);
 }
 var count4 = 0;
-var main_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}]}];
+var main_data = [{"1":[{"1":[],"2":[],"3":[],"4":[]}],"2":[{"1":[],"2":[],"3":[],"4":[]}],"3":[{"1":[],"2":[],"3":[],"4":[]}],"4":[{"1":[],"2":[],"3":[],"4":[]}],"5":[{"1":[],"2":[],"3":[],"4":[]}],"6":[{"1":[],"2":[],"3":[],"4":[]}],"7":[{"1":[],"2":[],"3":[],"4":[]}],"8":[{"1":[],"2":[],"3":[],"4":[]}],"9":[{"1":[],"2":[],"3":[],"4":[]}],"10":[{"1":[],"2":[],"3":[],"4":[]}],"11":[{"1":[],"2":[],"3":[],"4":[]}],"12":[{"1":[],"2":[],"3":[],"4":[]}],"13":[{"1":[],"2":[],"3":[],"4":[]}],"14":[{"1":[],"2":[],"3":[],"4":[]}],"15":[{"1":[],"2":[],"3":[],"4":[]}],"16":[{"1":[],"2":[],"3":[],"4":[]}],"17":[{"1":[],"2":[],"3":[],"4":[]}],"18":[{"1":[],"2":[],"3":[],"4":[]}],"19":[{"1":[],"2":[],"3":[],"4":[]}],"20":[{"1":[],"2":[],"3":[],"4":[]}],"21":[{"1":[],"2":[],"3":[],"4":[]}],"22":[{"1":[],"2":[],"3":[],"4":[]}],"23":[{"1":[],"2":[],"3":[],"4":[]}],"24":[{"1":[],"2":[],"3":[],"4":[]}],"25":[{"1":[],"2":[],"3":[],"4":[]}],"26":[{"1":[],"2":[],"3":[],"4":[]}],"27":[{"1":[],"2":[],"3":[],"4":[]}],"28":[{"1":[],"2":[],"3":[],"4":[]}],"29":[{"1":[],"2":[],"3":[],"4":[]}],"30":[{"1":[],"2":[],"3":[],"4":[]}],"31":[{"1":[],"2":[],"3":[],"4":[]}],"branch":["fixed"]}];
 function add3(d,t,n,s){
     var text = "p"+d+','+t+','+n;
     var text2 = "namess"+t+d;
@@ -752,6 +760,34 @@ function number_get(){
             document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
         }
         document.getElementById("sn").innerHTML = "募集人数の設定";
+    })
+    .catch(err=>{
+        console.log(err);
+        alert("データ取得中にエラーが発生しました");
+    })
+}
+function number_get2(){
+    var url2 = url+"?branch=number_get";
+    fetch(url2,{
+        "method":"get",
+        "mode":"cors"
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.json()
+        }
+    })
+    .then(json =>{
+        for(var i = 1; i<=after_last_date; i++){
+            var text1 = "d"+i;
+            var text2 = "";
+            var days = ["朝","昼","夜"];
+            for(var a =1; a<=3; a++){
+                text2 += '<p class="nm">'+days[a-1]+" ： "+json[0][i][0][a]+'</p>';
+            }
+            document.getElementById(text1).insertAdjacentHTML("beforeend",text2);
+        }
+        branch = "ok";
     })
     .catch(err=>{
         console.log(err);

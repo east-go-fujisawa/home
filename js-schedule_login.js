@@ -81,7 +81,7 @@ function register(text){
             stop();
             location.href = "schedule.html?username="+username;
         }else if(json[0] == "ok" ){
-            alert("ログインしました");
+            //alert("ログインしました");
             stop();
             location.href="schedule.html?username="+username;
         }else if(json[0] == "send"){

@@ -35,7 +35,10 @@
             <div class="right" id="right">
                 <p class="theme">配信するメッセージ</p>
                 <textarea id="texts" value="" placeholder="メッセージを入力する"></textarea>
-                <button id="send_button" onclick="send()">送信する</button>
+                <p class="theme">配信するファイル</p>
+                <p onclick="jump()" id="upl">ファイルをアップロードする</p>
+                <div id="input_url"></div>
+                <button id="send_button" onclick="send2()">送信する</button>
             </div>
         </div>
         <script src="js-line_send.js"></script>

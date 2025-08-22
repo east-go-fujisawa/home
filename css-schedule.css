@@ -621,11 +621,13 @@ color:grey;
 .dd{
     font-size:11px;
 }
-.nm{
-    color:gray;
-    font-size:10px;
-}
+
 #dd{
     font-weight:600;
     font-size:15px;
+}
+.nm{
+    color:gray;
+    font-size:10px;
+    display: inline-block;
 }
