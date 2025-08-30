@@ -114,11 +114,36 @@ function del(text){
 }
 
 function send2(){
-
-}
-
-function send(){
     document.getElementById("send_button").innerHTML = "送信中";
+var url2 = "https://script.google.com/macros/s/AKfycbyk_i14NGTraFc4_gFBnXLwuA1vGktlAhdCL0hKEYSJEgjk4RfSUo6XOonZuqYpYbRK-g/exec";
+fetch(url2,{
+    "method":"get",
+    "mode":"cors"
+})
+.then(response =>{
+    if(response.ok){
+        return response.json()
+    }
+})
+.then(json=>{
+    console.log(json[0]);
+    if(json[0][0] == number){
+        document.getElementById("al").innerHTML ="GitHubで画像を公開中です。1分程度お待ちください。"
+        setTimeout(()=>{
+        send(json[0][1]);    
+        },60000)
+    }else{
+        send("none")
+    }
+    
+})
+.catch(e =>{
+    console.log(e);
+    alert("データ取得時にエラーが発生しました\nエラーコード7");       
+})
+}
+function send(path){
+    //document.getElementById("send_button").innerHTML = "送信中";
     var texts = document.getElementById("texts").value;
         if(texts.length == 0){
         alert("空欄です");
@@ -146,16 +171,11 @@ function send(){
             "branch":"send_all"
         }]
     }else{
-        var data_num2 = [];
-        if(data_num > 0){
-            data_num2.push(document.getElementById("i_url").value);
-        }else{
-            data_num2.push("none");
-        }
+
     var datas = [{
         "message":texts,
         "usernames":add_name,
-        "data_num":data_num2,
+        "data_num":path,
         "branch":"send"
     }];
     }
@@ -169,6 +189,7 @@ function send(){
     fetch(url,params)
     .then(response=>{
         document.getElementById("send_button").innerHTML = "送信完了";
+        document.getElementById("al").innerHTML ="";
         setTimeout(()=>{
             document.getElementById("send_button").innerHTML = "送信する";
         },3000);
@@ -179,16 +200,23 @@ function send(){
     })
     
 }
-var data_num = 0;
-function jump(){
-    if(data_num == 0){
-    var number = Math.random()*100000;
-    number = parseInt(number);
-    data_num = number;
-    window.open("https://script.google.com/macros/s/AKfycbz953kk_2OzDM02VcmMtM5mBqVpMq5VgOUtJEtJ7kf5svRC-HNmsP1GJKBAnfCfQuo/exec?id="+data_num,"_blank");
-    document.getElementById("input_url").insertAdjacentHTML("beforeend",'<input type="url" id="i_url" value="" placeholder="URLを入力">')
-    document.getElementById("upl").remove();
-    }else{
 
+var number = 0;
+function file_up(){
+    document.getElementById("if").style.display = "block";
+    document.getElementById("open").style.display = "none";
+    var url2 = "https://script.google.com/macros/s/AKfycbyk_i14NGTraFc4_gFBnXLwuA1vGktlAhdCL0hKEYSJEgjk4RfSUo6XOonZuqYpYbRK-g/exec";
+    number = Math.random()*100000;
+    number = parseInt(number);
+    var datas = [{
+        "branch":"time",
+        "message":number
+    }]
+    var params = {
+        "method":"post",
+        "mode":"no-cors",
+        "Content-Type":"application/json",
+        "body":JSON.stringify(datas)
     }
+    fetch(url2,params);
 }

@@ -35,7 +35,7 @@ body{
 .left div{
     display: inline-block;
     vertical-align: top;
-    width: 25vw;
+    width: 30vw;
 }
 .left div p{
     vertical-align: top;
@@ -48,12 +48,13 @@ body{
     background-color: black;
     color:white;
     font-size:10px;
-    padding: 2vw;
-    padding-top:1vw;
-    padding-bottom:1vw;
+    padding: 1vw;
+    padding-top:0.5vw;
+    padding-bottom:0.5vw;
     margin-bottom:10px;
     margin-right:10px;
     display: inline-block;
+    font-weight: 600;
 }
 .theme{
     font-weight:700;
@@ -84,4 +85,11 @@ body{
     vertical-align: bottom;
     outline:0;
     border:0;
+}
+.if{
+    display: none;
+}
+iframe{
+    outline: none;
+    border:none;
 }

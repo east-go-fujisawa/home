@@ -5,7 +5,8 @@ document.getElementById("add1").onclick = add;
 document.getElementById("sub").onclick = sub;
 var url = "https://script.google.com/macros/s/AKfycbx0xGKdu9XNdBmaQV9S1kUGB44f6boIPswobzhvHawe6ahkRSWJkoSwhW1cspUOh1o/exec";
 var username = "";
-if(screen.width > 800){
+console.log(window.innerWidth);
+if(window.innerWidth > 600){
 var text ='<link rel="stylesheet" href="css-schedule.css">';
 }else{
 var text = '<link rel="stylesheet" href="css-schedule2.css">';
@@ -73,6 +74,7 @@ function start_ani(){
             document.getElementById("start_check").style.display = "none";
         }else if(branch == "no"){
             document.getElementById("start_check2").innerHTML = "シフト登録の許可がありません";
+            document.getElementById("l").innerHTML = "登録したシフトを確認する"
             document.getElementById("ca").style.display = "none";
             document.getElementById("bar").style.display = "none";
             document.getElementById("top").style.display = "none";
@@ -365,7 +367,8 @@ console.log(JSON.stringify(datas));
     var url1 = url+'?username='+username;//セキュリティ面アウト
     fetch(url1,params)
     .then(res=>{
-alert("登録が完了しました\n(登録されているメールアドレスにも通知されます)");
+    alert("シフト登録が完了しました\n(登録されているメールアドレスにも通知されます)");
+    location.href = url+"?username="+username;
     })
     .catch(err=>{
         console.log(err);

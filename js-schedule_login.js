@@ -97,6 +97,7 @@ function register(text){
     })
     .catch(e=>{
         console.log(e);
+        alert("データ取得中にエラーが発生しました\nエラーコード：3")
         stop();
     })
     url="";

@@ -631,3 +631,15 @@ color:grey;
     font-size:10px;
     display: inline-block;
 }
+#l{
+    position: absolute;
+    left:50%;
+    top:70%;
+    margin:0;
+    padding:0;
+    margin-left:-10vw;
+    font-weight: 600;
+    width: 20vw;
+    color:white;
+    z-index: 5000;
+}

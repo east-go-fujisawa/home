@@ -36,11 +36,15 @@
                 <p class="theme">配信するメッセージ</p>
                 <textarea id="texts" value="" placeholder="メッセージを入力する"></textarea>
                 <p class="theme">配信するファイル</p>
-                <p onclick="jump()" id="upl">ファイルをアップロードする</p>
-                <div id="input_url"></div>
+                <button onclick="file_up()" id="open">＋開く</button>
+                <div class="if" id="if">
+                <iframe src="https://script.google.com/macros/s/AKfycbyP9IMp9U2ogwcmhsCOAXax3RpRRR5fuQC8dJORrm663Ib4tFcqh2qgkcs9lo19A04/exec" width="800" height="75"></iframe>
+                </div>
                 <button id="send_button" onclick="send2()">送信する</button>
+                <div id="al"></div>
             </div>
         </div>
         <script src="js-line_send.js"></script>
+        <script src="github_upload.js"></script>
     </body>
 </html>
