@@ -2,6 +2,7 @@ var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetF
 var add_name = [];
 var all_status = 0;
 var names_ids_datas = "";
+var number = 0;
 function start(){
 
 /*var urll = new URL(window.location.href);
@@ -90,7 +91,7 @@ function add(text){
         if(names_ids_datas.length > 0){
         document.getElementById(text).remove();
         var text2 = '<p class="b1" id="'+text+'" onclick=del("'+text+'")>'+text+'</p>';
-        document.getElementById("add_names").insertAdjacentHTML("beforeend",text2);
+        document.getElementById("add_names2").insertAdjacentHTML("beforeend",text2);
         add_name.push(text);
         }else{
             alert("データ取得中です\nしばらくお待ちください\n2秒後自動で処理を行います");
@@ -114,7 +115,14 @@ function del(text){
 }
 
 function send2(){
-    document.getElementById("send_button").innerHTML = "送信中";
+    if(add_name.length == 0){
+        alert("配信該当者がいません");
+        return;
+    }else if(document.getElementById("texts").value.length == 0 && number == 0){
+        alert("メッセージも画像もありません");
+        return;
+    }   
+ document.getElementById("send_button").innerHTML = "送信中";
 var url2 = "https://script.google.com/macros/s/AKfycbyk_i14NGTraFc4_gFBnXLwuA1vGktlAhdCL0hKEYSJEgjk4RfSUo6XOonZuqYpYbRK-g/exec";
 fetch(url2,{
     "method":"get",
@@ -127,13 +135,47 @@ fetch(url2,{
 })
 .then(json=>{
     console.log(json[0]);
-    if(json[0][0] == number){
-        document.getElementById("al").innerHTML ="GitHubで画像を公開中です。1分程度お待ちください。"
-        setTimeout(()=>{
-        send(json[0][1]);    
-        },60000)
+    if(json[0][0] == number && json[0][1].length > 0){
+        document.getElementById("al").innerHTML ="GitHubで画像を公開中です。しばらくお待ちください。"
+        try{
+            fetch("https://east-go-fujisawa.github.io/datas/photos/"+json[0][1],{
+                "method":"HEAD"
+            })
+            .then(response=>{
+                if(response.ok){
+                    send(json[0][1]);
+                }else{
+                    setTimeout(()=>{
+                        console.log("rget");
+                        send2();
+                    },5000)
+                }
+            })
+            .catch(e=>{
+                console.log(e);
+                alert("データ取得時にエラーが発生しました\nエラーコード8");
+            })
+        }catch(e){
+                console.log(e);
+                alert("データ取得時にエラーが発生しました\nエラーコード8");
+        }
+    }else if(json[0][0] == number && json[0][1].length == 0){
+        var result = window.confirm("画像がアップロードされていません\n忘れていませんか？");
+        if(result){
+            document.getElementById("send_button").innerHTML = "送信する";
+            return;
+        }else{
+            if(document.getElementById("texts").value.length == 0){
+                alert("メッセージも空欄です");
+                document.getElementById("send_button").innerHTML = "送信する";
+                return;
+            }else{
+                send("none");
+            }
+            
+        }
     }else{
-        send("none")
+        send("none");
     }
     
 })
@@ -145,11 +187,6 @@ fetch(url2,{
 function send(path){
     //document.getElementById("send_button").innerHTML = "送信中";
     var texts = document.getElementById("texts").value;
-        if(texts.length == 0){
-        alert("空欄です");
-        document.getElementById("send_button").innerHTML = "送信する";
-        return;
-    }
     //texts = texts.replace(/\n/g,"\"+'n');
     console.log(texts);
     if(all_status == 1){
@@ -201,7 +238,7 @@ function send(path){
     
 }
 
-var number = 0;
+
 function file_up(){
     document.getElementById("if").style.display = "block";
     document.getElementById("open").style.display = "none";

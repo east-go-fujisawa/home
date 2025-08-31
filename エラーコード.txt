@@ -4,3 +4,5 @@
 4:js-line_send.js/None
 5:js-line_send.js/send()
 7:js-line_send.js/send2()
+8:js-line_send.js/send2()
+9:js-line_send.js/send2()

@@ -1,4 +1,19 @@
 <script>
-    var url = 'https://docs.google.com/spreadsheets/d/1aVFlSwXYthZAL-AD5kkCnxleYcSwcgqHSbhrhbs1vxk/edit?usp=sharing';
-    
+   var url="https://east-go-fujisawa.github.io/datas/photos/0230416_092122320_iOS.jpg";
+   try{
+    var res = fetch(url,{
+        "method":"HEAD"
+    })
+    .then(Response=>{
+        console.log(Response);
+        if(Response.ok){
+            console.log("存在します");
+        }else{
+            console.log("存在しません");
+        }
+    })
+    console.log(res);
+   }catch(e){
+    console.log(e);
+   }
 </script>
