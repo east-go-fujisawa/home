@@ -2,7 +2,7 @@ body{
     margin:0;
     padding:0;
     font-family: Arial;
-    background-color: rgb(243,243,243);
+    background-color: rgb(230,230,230);
 }
 .top{
     position:relative;
@@ -31,7 +31,7 @@ body{
     height:5vh;
     outline: none;
     border:none;
-    box-shadow: 0 0 5px 2px rgb(243,243, 243);
+    box-shadow: 0 0 5px 2px rgb(230,230,230);
 }
 .left div{
     display: inline-block;
@@ -93,4 +93,11 @@ body{
 iframe{
     outline: none;
     border:none;
+}
+button{
+    transition: background-color 0.1s ease-in-out 0.1s, color 0.1s ease-in-out 0.1s;
+}
+button:hover{
+    background-color: rgb(230,230,230);
+    color:black;
 }

@@ -63,7 +63,7 @@ function change(grade){
         document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
         document.getElementById("add_names").insertAdjacentHTML("beforeend",'<div id="add_names2"></div>');
         add_name = [];
-        
+
     }else if(add_name.length == 0){
         try{
     document.getElementById("names2").remove();
@@ -274,4 +274,8 @@ function file_up(){
         "body":JSON.stringify(datas)
     }
     fetch(url2,params);
+}
+
+function jump2(){
+    window.open("intro1.html","_blank");
 }
