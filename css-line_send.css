@@ -9,6 +9,7 @@ body{
     left:5vw;
     width: max-content;
     height:10vh;
+    line-height: 10vh;
     border-bottom: 3px solid black;
 }
 .top h1{
