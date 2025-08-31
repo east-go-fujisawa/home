@@ -55,11 +55,28 @@ datas[0][i][0]["name"].push(n);
 
 document.getElementById("grade").onchange = change;
 function change(grade){
-    document.getElementById("names2").remove();
-    grade = grade.target.value;
     
+    grade = grade.target.value;
+    if(add_name.length > 0 && grade.indexOf("全員") > 0 && past_grade == grade.substring(0,1)){
+        document.getElementById("names2").remove();
+        document.getElementById("add_names2").remove();
+        document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
+        document.getElementById("add_names").insertAdjacentHTML("beforeend",'<div id="add_names2"></div>');
+        add_name = [];
+        
+    }else if(add_name.length == 0){
+        try{
+    document.getElementById("names2").remove();
+        }catch(e){
+
+        }
+    }else{
+        alert("学年を跨いで送信することはできません");
+        return;
+    }
     if(grade.indexOf("全員") > 0){
         grade = grade.substring(0,1);
+        past_grade = grade;
         var count = -1;
         for(var n of names_ids_datas[0][grade]){
             count++;
@@ -73,6 +90,7 @@ function change(grade){
         }
     }else{
     grade = grade.substring(0,1);
+    past_grade = grade;
     var count = -1;
     document.getElementById("names").insertAdjacentHTML("beforeend",'<div id="names2"></div>');
     for(var n of names_ids_datas[0][grade]){
