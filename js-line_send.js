@@ -1,8 +1,10 @@
 var url = "https://script.google.com/macros/s/AKfycbxjWVbr7uxCMrVrk2obh8QhDocetFj7IxTm4f5UYvW3DKhlSR4pkLMELeHJb2R98e5f/exec"; //なまえとIDデータ
+var url_log = "https://script.google.com/macros/s/AKfycbyMO0vgv9oaTtWZNtPADQGuOpOKyqkCsDm9GAFykqCa6wQHDZGtB40CE4rk583S2B1Q/exec";
 var add_name = [];
 var all_status = 0;
 var names_ids_datas = "";
 var number = 0;
+var b ="run";
 function start(){
 
 /*var urll = new URL(window.location.href);
@@ -243,6 +245,7 @@ function send(path){
     }
     fetch(url,params)
     .then(response=>{
+        b = "stop";
         document.getElementById("send_button").innerHTML = "送信完了";
         document.getElementById("al").innerHTML ="";
         setTimeout(()=>{
@@ -278,4 +281,28 @@ function file_up(){
 
 function jump2(){
     window.open("intro1.html","_blank");
+}
+
+function ani(){
+    b = "run";
+    var count =  0;
+    var inte = setInterval(()=>{
+        if(b == "run"){
+        count++;
+        if(count == 1){
+            document.getElementById("send_button").innerHTML = "送信中";
+        }else if(count == 2){
+            document.getElementById("send_button").innerHTML = "送信中.";
+        }else if(count == 3){
+            document.getElementById("send_button").innerHTML = "送信中..";
+        }else if(count == 4){
+            document.getElementById("send_button").innerHTML = "送信中...";
+            count = 0;
+        }
+        }else{
+            clearInterval(inte);
+            return;
+        }
+        
+    },1000);
 }

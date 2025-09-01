@@ -101,3 +101,8 @@ button:hover{
     background-color: rgb(230,230,230);
     color:black;
 }
+.g{
+    border-bottom: 1px solid black;
+    width:fit-content;
+
+}
