@@ -6,23 +6,29 @@
         <link rel="stylesheet" href="css-line_send.css">
     </head>
     <body onload="start()">
+    <!--body onload="guide()"-->
         <div class="top" id="top">
             <h1><strong id="t">LINE</strong>配信ツール</h1>
         </div>
         <div class="center" id="center">
             <div class="left" id="left">
+                <div class="guide1" id="guide1">
                 <div class="grades">
-                <p class="theme" id="theme">➀配信学年を選ぶ</p>
-                <select id="grade">
-                    <option>選択してください</option>
-                    <option value="1年">1年</option>
-                    <option value="2年">2年</option>
-                    <option value="3年">3年</option>
-                    <option value="1年全員">1年全員</option>
-                    <option value="2年全員">2年全員</option>
-                    <option value="3年全員">3年全員</option>
-                </select>
+                 <p class="theme" id="theme">➀配信学年を選ぶ</p>
+                     <select id="grade">
+                        <option>選択してください</option>
+                        <option value="1年">1年</option>
+                       <option value="2年">2年</option>
+                       <option value="1年全員">1年全員</option>
+                       <option value="3年">3年</option>
+                       <option value="3年全員">3年全員</option>
+                       <option value="2年全員">2年全員</option>
+                    </select>
                 </div>
+                <pre id="p">配信したい学年を選びましょう！
+※学年を跨いでの配信はNG</pre>
+                </div>
+                <div class="guide2" id="guide2">
                 <div id="names">
                     <p class="theme">➁配信候補者</p>
                     <div id="names2"></div>
@@ -31,10 +37,19 @@
                     <p class="theme">➂配信該当者</p>
                     <div id="add_names2"></div>
                 </div>
+                <pre id="p1">配信したい人の名前をクリックしましょう！
+名前をクリックしたら、「候補者」⇔「該当者」に追加されます</pre>
+                </div>
             </div>
             <div class="right" id="right">
+                <div class="guide3" id="guide3">
                 <p class="theme">➃配信するメッセージ</p>
                 <textarea id="texts" value="" placeholder="メッセージを入力する"></textarea>
+                <pre id="p2">メッセージを入力しましょう！
+改行もできますよ！
+※ファイルだけ送信したい場合は、空欄でOKです！</pre>
+                </div>
+                <div class="guide4" id="guide4">
                 <p class="theme">➄配信するファイル</p>
                 <button onclick="file_up()" id="open">＋開く</button>
                 <div class="if" id="if">
@@ -42,9 +57,19 @@
                 </div>
                 <button id="send_button" onclick="send2()">送信する</button>
                 <div id="al"></div>
-                <p class="g" onclick="jump2()">ガイドを見る（困ったらリロード！）</p>
-            </div>
+                <pre id="p3">配信したいファイル・画像等をアップロードしましょう！（無ければ、送信ボタンをポチ）
+➀「＋開く」ボタンを押す
+➁ファイルを選択してアップロード
+➂アップロードが完了したら、送信ボタンを押す
+➃ボタンが「送信中」から「送信完了」になったらOKです！
+
+※ファイルの送信をする場合、時間が30秒～1分くらいかかることもある。
+※送信できてるかは、トークルームみれば確認できます！</pre>
+                </div>
+                <p class="g" onclick="guide()">ガイドを見る（困ったらリロード！）</p>
+            </div>  
         </div>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="js-line_send.js"></script>
         <script src="github_upload.js"></script>
     </body>

@@ -106,3 +106,41 @@ button:hover{
     width:fit-content;
 
 }
+.left .grades{
+    width: 20vw;
+}
+.left .guide1{
+    border:none;
+    padding:10px;
+    width: 20vw;
+    opacity: 1;
+}
+.left .guide2{
+    border:none;
+    padding:10px;
+    width: max-content;
+    opacity: 1;
+}
+.left .guide2 div{
+    display: inline-block;
+}
+.guide3{
+    border:none;
+    padding:10px;
+    width: fit-content;
+    opacity: 1;
+}
+.guide4{
+    border:none;
+    padding:10px;
+    width: fit-content;
+    opacity: 1;
+}
+pre{
+    font-size:15px;
+    background-color: black;
+    color:white;
+    padding:10px;
+    box-shadow: 5px 5px 2px 2px rgb(210, 210, 210);
+    display: none;
+}
