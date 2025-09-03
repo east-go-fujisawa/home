@@ -144,3 +144,35 @@ pre{
     box-shadow: 5px 5px 2px 2px rgb(210, 210, 210);
     display: none;
 }
+.main{
+    display: none;
+}
+.sub p{
+    position: absolute;
+    left:50%;
+    top:50%;
+    width:20vw;
+    height:5vh;
+    margin-left:-10vw;
+    margin-top:-2.5vh;
+    text-align: center;
+    line-height: 5vh;
+    letter-spacing:5px;
+    font-size:20px; 
+    font-weight: 300;
+}
+.sub #d{
+        position: absolute;
+    left:50%;
+    top:50%;
+    width:20vw;
+    height:5vh;
+    margin-left:-10vw;
+    margin-top:-2.5vh;
+    text-align: center;
+    line-height: 5vh;
+    letter-spacing: 2px;
+    font-size:10px; 
+    margin-top:5vh;
+    font-weight: 300;
+}

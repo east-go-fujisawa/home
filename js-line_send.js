@@ -6,6 +6,9 @@ var names_ids_datas = "";
 var number = 0;
 var div_name = "";
 var b ="run";
+
+
+
 function start(){
 
 /*var urll = new URL(window.location.href);
@@ -20,8 +23,8 @@ if(param.length > 0){
 }*/
 
 document.getElementById("center").style.display = "none";
-document.getElementById("t").innerHTML = "ー準備中ー";
-document.getElementById("t").style.color = "black";
+document.getElementById("d").innerHTML = "データ取得中...";
+document.getElementById("d").style.color = "black";
 var url2 = url+"?branch=username_get";
 fetch(url2,{
     "method":"get",
@@ -37,6 +40,8 @@ fetch(url2,{
     document.getElementById("center").style.display = "block";
 document.getElementById("t").innerHTML = "LINE";
 document.getElementById("t").style.color = "rgb(0, 223, 11)";
+document.getElementById("sub").style.display = "none";
+document.getElementById("main").style.display = "block";
 })
 .catch(e =>{
     console.log(e);
@@ -125,8 +130,9 @@ function add(text){
     document.getElementById("guide2").style.border = "none";
     document.getElementById("guide3").style.border = "5px solid rgb(0, 0, 0)";    
     div_name = "guide3";
-    }
     guide2();
+    }
+    
         if(names_ids_datas.length > 0){
         document.getElementById(text).remove();
         var text2 = '<p class="b1" id="'+text+'" onclick=del("'+text+'")>'+text+'</p>';
