@@ -4,7 +4,7 @@ var add_name = [];
 var all_status = 0;
 var names_ids_datas = "";
 var number = 0;
-var div_name = "guide1";
+var div_name = "";
 var b ="run";
 function start(){
 
@@ -58,9 +58,12 @@ datas[0][i][0]["name"].push(n);
 
 document.getElementById("grade").onchange = change;
 function change(grade){
+    if(div_name.length > 0){
     div_name = "guide2";
     document.getElementById("guide1").style.border = "none";
     document.getElementById("guide2").style.border = "5px solid rgb(0, 0, 0)";
+    }
+
     
     grade = grade.target.value;
     if(add_name.length > 0 && grade.indexOf("全員") > 0 && past_grade == grade.substring(0,1)){
@@ -94,11 +97,12 @@ function change(grade){
         add_name.push(n);
             }
         }
+    if(div_name.length > 0){
     document.getElementById("guide2").style.border = "none";
-    document.getElementById("guide3").style.border = "5px solid rgb(0, 0, 0)";
-    
+    document.getElementById("guide3").style.border = "5px solid rgb(0, 0, 0)";    
     div_name = "guide3";
     guide2();
+    }
     }else{
     grade = grade.substring(0,1);
     past_grade = grade;
@@ -117,10 +121,11 @@ function change(grade){
 }
 
 function add(text){
+    if(div_name.length > 0){   
     document.getElementById("guide2").style.border = "none";
     document.getElementById("guide3").style.border = "5px solid rgb(0, 0, 0)";    
-    
     div_name = "guide3";
+    }
     guide2();
         if(names_ids_datas.length > 0){
         document.getElementById(text).remove();
@@ -149,7 +154,9 @@ function del(text){
 }
 
 function send2(){
+    if(div_name.length > 0){    
     document.getElementById("guide4").style.border = "none";
+    }
     if(add_name.length == 0){
         alert("配信該当者がいません");
         return;
@@ -278,7 +285,9 @@ function send(path){
 function file_up(){
     document.getElementById("if").style.display = "block";
     document.getElementById("open").style.display = "none";
+    if(div_name.length > 0){   
     document.getElementById("guide4").style.border = "none";
+    }
     var url2 = "https://script.google.com/macros/s/AKfycbyk_i14NGTraFc4_gFBnXLwuA1vGktlAhdCL0hKEYSJEgjk4RfSUo6XOonZuqYpYbRK-g/exec";
     number = Math.random()*100000;
     number = parseInt(number);
@@ -325,6 +334,7 @@ function ani(){
 
 function guide(){
     var count = 0;
+    div_name = "guide1";
     document.getElementById("p").style.display = 'block';
     document.getElementById("p1").style.display = 'block';
     document.getElementById("p2").style.display = 'block';
