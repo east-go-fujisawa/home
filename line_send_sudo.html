@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>管理者メニュー   </title>
+        <link rel="stylesheet" href="css-line_send_sudo.css">
+    </head>
+    <body>
+        <div class="top" id="top">
+            <p>管理者メニュー</p>
+                <div class="b1" id="b1">
+                    <button onclick="user()">ユーザー管理</button>
+                    <button onclick="change()">年度更新</button>
+                </div>
+        </div>
+        <div class="center" id="center">
+            <!--ユーザー管理    -->
+            <div class="s1" id="s1">
+                <p>生徒名変更</p>
+                <div class="n1" id="n1"></div>
+                <div class="n2" id="n2">
+                    
+                    <input type="text" id="c_name" placeholder="名前を入力する" value="">
+                    <button onclick="name_change()"></button>
+                </div>
+            </div>
+            <div class="s1" id="s2">
+                <p>生徒削除</p>
+                <div class="n1" id="n1"></div>
+                
+            </div>            
+            <div class="s1" id="s1">
+                <p>年度更新手続き</p>
+                <button onclick="year_change()"></button>
+            </div>
+            <!--年度更新       -->
+        </div>
+        <script src="js-line_send_sudo.js"></script>
+    </body>
+</html>

@@ -367,3 +367,6 @@ function guide2(){
     },5000)
 
 }
+function line_send_sudo(){
+    window.open("line_send_sudo.html",'_block')
+}
